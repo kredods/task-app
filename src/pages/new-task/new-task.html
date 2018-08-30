@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      New Task
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label fixed>Task Name:</ion-label>
+    <ion-input type="text" value="" [(ngModel)]="name"></ion-input>
+  </ion-item>
+  <div padding>
+    <button ion-button color="dark" (click)="create()" outline>Create</button>
+  </div>
+</ion-content>

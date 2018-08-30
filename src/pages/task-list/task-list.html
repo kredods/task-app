@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons start *ngIf="tasks && tasks.length !== 0">
+      <button ion-button (click)="clearAll()">
+      Clear All  
+      <ion-icon name="trash"></ion-icon>          
+    </button>
+    </ion-buttons>
+    <ion-title>Tasks</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="createNewTask()">
+      <ion-icon name="create"></ion-icon>
+      Add            
+    </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h3 *ngIf="!tasks || tasks.length === 0"> Click Add above to create a new task</h3>
+  <ion-card *ngIf="tasks && tasks.length !== 0">
+    <ion-card-header>
+      Created Tasks
+    </ion-card-header>
+    <ion-list>
+      <button ion-item *ngFor="let task of tasks" (click)="itemSelected(task)">
+        <ion-icon name="clipboard"></ion-icon>
+    {{ task.name }}
+      </button>
+    </ion-list>
+  </ion-card>
+</ion-content>

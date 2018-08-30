@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons start>
+      <button ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>  
+      Back        
+    </button>
+    </ion-buttons>
+    <ion-title>{{task.name}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="showInput()">
+      New Subtask            
+    </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <h3 *ngIf="task.subtasks.length === 0 && !showSubtaskInput ">
+    Click New Subtask to create a subtask
+  </h3>
+
+  <ion-list *ngIf="!editShown">
+    <ion-item *ngFor="let subtask of task.subtasks">
+      <ion-label>{{subtask.title}}</ion-label>
+      <ion-checkbox color="dark" [(ngModel)]="subtask.handled"></ion-checkbox>
+    </ion-item>
+    <ion-item *ngIf="showSubtaskInput">
+      <ion-label floating>Name: </ion-label>
+      <ion-input type="text" value="" [(ngModel)]="title"></ion-input>
+      <button ion-button outline item-right icon-left (click)="createSubtask()">
+      create
+    </button>
+      <button (click)="cancelInput()" ion-button outline item-right icon-left>
+      cancel
+    </button>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="editShown">
+    <ion-item *ngFor="let subtask of task.subtasks">
+      <ion-label floating>Name: </ion-label>
+      <ion-input type="text" value="" [(ngModel)]="subtask.title"></ion-input>
+      <button color="danger" ion-button outline item-right icon-left (click)="deleteSubtask(subtask)">
+      <ion-icon name="trash"></ion-icon>  
+    </button>
+    </ion-item>
+  </ion-list>
+  <br>
+  <br>
+  <button outline color="danger" ion-button full (click)="deleteTask()">Delete this task</button>
+  <div *ngIf="task.subtasks.length!==0">
+    <button *ngIf="!editShown" outline ion-button full (click)="toggleEdit()">Edit Subtasks</button>
+    <button *ngIf="editShown" outline ion-button full (click)="toggleEdit()">Save</button>
+  </div>
+</ion-content>
